@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Disease Diagnosis</title>
+    <style>
+        .report-section {
+            margin: 40px auto;
+            max-width: 90%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-section h2 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .report-section img {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .report-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .report-section th, .report-section td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .report-section th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+            width: 100%;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/healthcare_left.png') }}" alt="Healthcare Left Logo">
+        <h1>Healthcare Analytics Using Machine Learning</h1>
+        <img src="{{ url_for('static', filename='images/healthcare_right.png') }}" alt="Healthcare Right Logo">
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/disease_diagnosis">Disease Diagnosis</a>
+        <a href="#">Cost Analysis</a>
+        <a href="#">Prescription Analysis</a>
+        <a href="#">Fraud Detection</a>
+        <a href="#">Public Health Data</a>
+        <a href="/logout" class="right">Logout</a>
+    </div>
+
+    <!-- Report Section -->
+    <div class="report-section">
+        <h2>Disease Diagnosis - Classification Results</h2>
+        <img src="{{ image_url }}" alt="Feature Importance Graph">
+
+        <h3>Classification Report:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Precision</td>
+                    <td>{{ report['1']['precision'] }}</td>
+                </tr>
+                <tr>
+                    <td>Recall</td>
+                    <td>{{ report['1']['recall'] }}</td>
+                </tr>
+                <tr>
+                    <td>F1-Score</td>
+                    <td>{{ report['1']['f1-score'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Sample Data:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Medical Condition</th>
+                    <th>Billing Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row['Name'] }}</td>
+                    <td>{{ row['Age'] }}</td>
+                    <td>{{ row['Gender'] }}</td>
+                    <td>{{ row['Medical Condition'] }}</td>
+                    <td>{{ row['Billing Amount'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 Healthcare Analytics. All Rights Reserved.</p>
+        <p>Contact: amrith782@gmail.com | Phone: +91-9361084487</p>
+    </div>
+</body>
+</html>

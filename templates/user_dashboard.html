@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Admin Dashboard</title>
+    <style>
+
+        /* Slideshow styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 50%;
+            margin: 120px auto 20px; /* Adjusted for the fixed header and navbar */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: none;
+        }
+
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Slide navigation dots */
+        .dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .dots span {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            display: inline-block;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dots .active {
+            background-color: #4CAF50;
+        }
+
+        /* Module description styles */
+        .module-descriptions {
+            max-width: 90%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .module {
+            margin-bottom: 20px;
+        }
+
+        .module h3 {
+            color: #4CAF50;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .module p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+            position: relative;
+            width: 100%;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/healthcare_left.png') }}" alt="Healthcare Left Logo">
+        <h1>Healthcare Analytics Using Machine Learning</h1>
+        <img src="{{ url_for('static', filename='images/healthcare_right.png') }}" alt="Healthcare Right Logo">
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="{{ url_for('disease_diagnosis') }}">Disease Diagnosis</a>
+        <a href="#">Cost Analysis</a>
+        <a href="#">Prescription Analysis</a>
+        <a href="#">Fraud Detection</a>
+        <a href="#">Public Health Data</a>
+        <a href="/logout" class="right">Logout</a>
+    </div>
+
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+        <div class="slides">
+            <img src="{{ url_for('static', filename='images/slideshow/slideshow2.jpg') }}" alt="Slide 1">
+        </div>
+        <div class="slides">
+            <img src="{{ url_for('static', filename='images/slideshow/slideshow4.jpg') }}" alt="Slide 2">
+        </div>
+        <div class="slides">
+            <img src="{{ url_for('static', filename='images/slideshow/slideshow5.jpg') }}" alt="Slide 3">
+        </div>
+    </div>
+
+    <!-- Dots for navigation -->
+    <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <!-- Module Descriptions Section -->
+    <div class="module-descriptions">
+        <div class="module">
+            <h3>Disease Diagnosis Using Machine Learning</h3>
+            <p>This module uses advanced machine learning algorithms to assist in the accurate and timely detection of diseases, improving patient outcomes and enhancing decision-making.</p>
+        </div>
+        <div class="module">
+            <h3>Healthcare Cost Analysis</h3>
+            <p>This module identifies cost drivers and trends in healthcare, enabling stakeholders to strategize and control expenditures effectively.</p>
+        </div>
+        <div class="module">
+            <h3>Drug Prescription Pattern Analysis</h3>
+            <p>Evaluates prescribing habits and trends, offering insights into medical practices and compliance with clinical guidelines.</p>
+        </div>
+        <div class="module">
+            <h3>Optimizing Medication Costs</h3>
+            <p>Helps identify cost-effective alternatives without compromising therapeutic efficacy, providing economical options for patients and providers.</p>
+        </div>
+        <div class="module">
+            <h3>Detecting Fraudulent Prescriptions</h3>
+            <p>Uses anomaly detection techniques to uncover and mitigate illegitimate prescription activities, ensuring compliance and reducing fraud.</p>
+        </div>
+        <div class="module">
+            <h3>Analyzing Public Health Data</h3>
+            <p>Integrates diverse datasets to monitor disease outbreaks, identify patterns, and support evidence-based policymaking in public health.</p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 Healthcare Analytics. All Rights Reserved.</p>
+        <p>Contact: amrith782@gmail.com | Phone: +91-9361084487</p>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slides");
+            let dots = document.getElementsByClassName("dot");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 3000); // Change slide every 3 seconds
+        }
+
+        function currentSlide(n) {
+            slideIndex = n - 1; // Set the slide index
+            showSlides();
+        }
+
+        // Initialize the slideshow
+        showSlides();
+    </script>
+</body>
+</html>
