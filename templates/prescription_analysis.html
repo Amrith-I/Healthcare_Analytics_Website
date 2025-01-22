@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Disease Diagnosis</title>
+    <title>Prescription Analysis</title>
     <style>
         .report-section {
             margin: 40px auto;
@@ -74,8 +74,8 @@
 
     <!-- Report Section -->
     <div class="report-section">
-        <h2>Disease Diagnosis - Disease Distribution</h2>
-        <img src="{{ image_url }}" alt="Disease Distribution Graph">
+        <h2>Prescription Analysis - Most Prescribed Medications by Disease</h2>
+        <img src="{{ image_url }}" alt="Prescription Analysis Graph">
 
         <h3>Sample Data Analysis:</h3>
         <table>
@@ -85,9 +85,7 @@
                     <th>Gender Count (Male)</th>
                     <th>Gender Count (Female)</th>
                     <th>Total Count</th>
-                    <th>Urgent</th>
-                    <th>Emergency</th>
-                    <th>Elective</th>
+                    <th>Medication Count</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,9 +95,7 @@
                     <td>{{ row['Gender Count (Male)'] }}</td>
                     <td>{{ row['Gender Count (Female)'] }}</td>
                     <td>{{ row['Total Count'] }}</td>
-                    <td>{{ row['Urgent'] }}</td>
-                    <td>{{ row['Emergency'] }}</td>
-                    <td>{{ row['Elective'] }}</td>
+                    <td>{{ row['Medication Count'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

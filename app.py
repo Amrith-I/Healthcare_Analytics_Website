@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from activities import register_user, login_user, check_admin_exists
-from dashboard_functionality import classify_disease
+from dashboard_functionality import classify_disease, cost_analysis, prescription_analysis
 
 app = Flask(__name__)
 app.secret_key = 'secret-key'  # Secret key for session management
@@ -82,9 +82,28 @@ def disease_diagnosis():
         "disease_diagnosis.html",
         report=report,
         data=data.to_dict(orient="records"),
-        image_url="/static/images/feature_importance.png"
+        image_url="/static/images/disease_distribution.png"
     )
 
+@app.route("/cost_analysis")
+def cost_analysis_page():
+    report, data = cost_analysis()
+    return render_template(
+        "cost_analysis.html",
+        report=report,
+        data=data.to_dict(orient="records"),
+        image_url="/static/images/cost_analysis.png"
+    )
+
+@app.route("/prescription_analysis")
+def prescription_analysis_page():
+    report, data = prescription_analysis()
+    return render_template(
+        "prescription_analysis.html",
+        report=report,
+        data=data.to_dict(orient="records"),
+        image_url="/static/images/prescription_analysis.png"
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
