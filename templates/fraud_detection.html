@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Prescription Analysis</title>
+    <title>Fraud Detection</title>
     <style>
         .report-section {
             margin: 40px auto;
@@ -67,15 +67,15 @@
         <a href="{{ url_for('disease_diagnosis') }}">Disease Diagnosis</a>
         <a href="{{ url_for('cost_analysis_page') }}">Cost Analysis</a>
         <a href="{{ url_for('prescription_analysis_page') }}">Prescription Analysis</a>
-        <a href="#">Fraud Detection</a>
+        <a href="{{ url_for('fraud_detection_page') }}">Fraud Detection</a>
         <a href="#">Public Health Data</a>
         <a href="/logout" class="right">Logout</a>
     </div>
 
     <!-- Report Section -->
     <div class="report-section">
-        <h2>Prescription Analysis - Most Prescribed Medications</h2>
-        <img src="{{ image_url }}" alt="Prescription Analysis Graph">
+        <h2>Fraud Detection - Test Results Analysis</h2>
+        <img src="{{ image_url }}" alt="Fraud Detection Graph">
 
         <h3>Sample Data Analysis:</h3>
         <table>
@@ -85,9 +85,9 @@
                     <th>Gender Count (Male)</th>
                     <th>Gender Count (Female)</th>
                     <th>Total Patients</th>
-                    {% for med in data[0].keys() if med not in ['Medical Condition', 'Gender Count (Male)', 'Gender Count (Female)', 'Total Patients', 'Total Count'] %}
-                    <th>{{ med }}</th>
-                    {% endfor %}
+                    <th>Abnormal</th>
+                    <th>Normal</th>
+                    <th>Inconclusive</th>
                     <th>Total Count</th>
                 </tr>
             </thead>
@@ -98,9 +98,9 @@
                     <td>{{ row['Gender Count (Male)'] }}</td>
                     <td>{{ row['Gender Count (Female)'] }}</td>
                     <td>{{ row['Total Patients'] }}</td>
-                    {% for med in row.keys() if med not in ['Medical Condition', 'Gender Count (Male)', 'Gender Count (Female)', 'Total Patients', 'Total Count'] %}
-                    <td>{{ row[med] }}</td>
-                    {% endfor %}
+                    <td>{{ row['Abnormal'] }}</td>
+                    <td>{{ row['Normal'] }}</td>
+                    <td>{{ row['Inconclusive'] }}</td>
                     <td>{{ row['Total Count'] }}</td>
                 </tr>
                 {% endfor %}
